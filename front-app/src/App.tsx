@@ -3,8 +3,8 @@ import { useState, useCallback } from "react";
 import { NavBar, NavList, Layout, LayoutMain, Footer } from "./components";
 
 import { AnimatePresence } from "framer-motion";
-import { RouterProvider } from "react-router-dom";
-import { router } from "./services/router";
+
+import { Outlet } from "react-router-dom";
 
 const App = () => {
   const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(true);
@@ -17,7 +17,7 @@ const App = () => {
       <LayoutMain>
         <AnimatePresence>{isOpenSideBar && <NavList />}</AnimatePresence>
         <AnimatePresence>
-          <RouterProvider router={router} />
+          <Outlet />
         </AnimatePresence>
       </LayoutMain>
       <Footer />

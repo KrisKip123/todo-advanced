@@ -7,11 +7,13 @@ import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 
 import styleScss from "./navList.module.scss";
 import { motion } from "framer-motion";
+import { NavLinkItem } from "../NavLinkItem/NavLinkItem";
 
 interface IMenuItems {
   iconComponent: JSX.Element;
   name: string;
   id: number;
+  path: string;
 }
 
 const menuItems: IMenuItems[] = [
@@ -19,21 +21,25 @@ const menuItems: IMenuItems[] = [
     id: 1,
     iconComponent: <HomeIcon />,
     name: "Home",
+    path: "/",
   },
   {
     id: 2,
     iconComponent: <CalendarMonthIcon />,
     name: "Calendar",
+    path: "calendar",
   },
   {
     id: 3,
     iconComponent: <PaymentsIcon />,
     name: "Currency",
+    path: "currency",
   },
   {
     id: 4,
     iconComponent: <LibraryMusicIcon />,
     name: "Music",
+    path: "music",
   },
 ];
 
@@ -51,19 +57,20 @@ export const NavList = () => {
       transition={{ duration: 0.2 }}
     >
       <List disablePadding className={containerLink}>
-        {menuItems.map(({ iconComponent, name, id }) => (
-          <ListItem
-            key={id}
-            disablePadding
-            component={motion.li}
-            whileHover={{
-              cursor: "pointer",
-              transition: { duration: 0.3 },
-            }}
-          >
-            {iconComponent}
-            <Typography component={"h2"}>{name}</Typography>
-          </ListItem>
+        {menuItems.map(({ iconComponent, name, id, path }) => (
+          <NavLinkItem key={id} to={path}>
+            <ListItem
+              disablePadding
+              component={motion.li}
+              whileHover={{
+                cursor: "pointer",
+                transition: { duration: 0.3 },
+              }}
+            >
+              {iconComponent}
+              <Typography component={"h2"}>{name}</Typography>
+            </ListItem>
+          </NavLinkItem>
         ))}
       </List>
     </AppBar>
