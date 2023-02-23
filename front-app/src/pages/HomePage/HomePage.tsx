@@ -2,23 +2,17 @@ import Container from "@mui/material/Container/Container";
 
 import { motion } from "framer-motion";
 
+import { pageAnimation } from "../../constants/animation";
+import { Clock } from "../../components/Clock/Clock";
+
 export const HomePage = () => {
   return (
     <Container
       component={motion.section}
-      initial={{
-        y: "-120%",
-      }}
-      animate={{
-        y: 0,
-      }}
-      exit={{
-        y: "120%",
-      }}
-      transition={{
-        duration: 0.8,
-        ease: "easeIn",
-      }}
+      initial={"initial"}
+      animate={"in"}
+      exit={"out"}
+      variants={pageAnimation}
       maxWidth={false}
       disableGutters
       sx={{
@@ -27,7 +21,11 @@ export const HomePage = () => {
         alignItems: "center",
       }}
     >
-      <div>KRISKIP123</div>
+      <div>
+        <Clock />
+        <div>date</div>
+        <div>welcome</div>
+      </div>
     </Container>
   );
 };
