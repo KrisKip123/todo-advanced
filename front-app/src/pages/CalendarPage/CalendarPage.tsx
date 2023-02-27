@@ -1,8 +1,9 @@
-import { Box, Container } from "@mui/material";
+import { Container, Box } from "@mui/material";
 
 import { motion } from "framer-motion";
 
 import { pageAnimation } from "../../constants/animation";
+import { DatePicker } from "./components/DatePicker/DatePicker";
 
 export const CalendarPage = () => {
   return (
@@ -15,22 +16,13 @@ export const CalendarPage = () => {
       maxWidth={false}
       disableGutters
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
+        padding: "10px",
       }}
     >
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "10px",
-        }}
-      >
-        HI
+      <Box sx={{ display: "flex" }}>
+        <DatePicker />
       </Box>
+      <div>1</div>
     </Container>
   );
 };
