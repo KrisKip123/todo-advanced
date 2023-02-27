@@ -49,7 +49,6 @@ export const DatePicker = () => {
   const prevYear = () => {
     setYear((prev) => prev - 1);
   };
-
   return (
     <Box>
       <Controls
