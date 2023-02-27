@@ -1,11 +1,10 @@
+import { Box, Container } from "@mui/material";
+
 import { motion } from "framer-motion";
 
 import { pageAnimation } from "../../constants/animation";
 
-import { Box, Container } from "@mui/material";
-import { Welcome } from "./components/Welcome/Welcome";
-
-export const HomePage = () => {
+export const CalendarPage = () => {
   return (
     <Container
       component={motion.section}
@@ -30,7 +29,7 @@ export const HomePage = () => {
           gap: "10px",
         }}
       >
-        <Welcome nameUser={"KRISKIP123"} />
+        HI
       </Box>
     </Container>
   );

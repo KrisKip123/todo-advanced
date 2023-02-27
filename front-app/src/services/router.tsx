@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { PlugPage } from "../pages/PlugPage/PlugPage";
 import { HomePage } from "../pages/HomePage/HomePage";
 import App from "../App";
+import { CalendarPage } from "../pages/CalendarPage/CalendarPage";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/calendar",
-        element: <PlugPage tittle="Calendar" />,
+        element: <CalendarPage />,
       },
       {
         path: "/currency",
