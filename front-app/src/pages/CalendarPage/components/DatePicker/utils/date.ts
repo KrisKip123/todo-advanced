@@ -56,35 +56,24 @@ const getArrayDate = (
   return cellsDate;
 };
 
+const getFullWeeks = (dateInput: Date) => {
+  const yearCurrent = dateInput.getFullYear();
+  const monthCurrent = dateInput.getMonth();
+  const allDaysCurrentMouth = getFullDaysInMonth(yearCurrent, monthCurrent);
+
+  const allWeeks = [
+    ...getPreviousMonthDays(yearCurrent, monthCurrent),
+    ...getArrayDate(allDaysCurrentMouth, "current", dateInput),
+    ...getNextMonthDays(yearCurrent, monthCurrent),
+  ];
+
+  return allWeeks;
+};
+
 const getDaysCalendar = ({ year, mouth }: ICalendar) => {
-  const getFullWeeks = (dateInput: Date) => {
-    const yearCurrent = dateInput.getFullYear();
-    const monthCurrent = dateInput.getMonth();
-    const allDaysCurrentMouth = getFullDaysInMonth(yearCurrent, monthCurrent);
-
-    const allWeeks = [
-      ...getPreviousMonthDays(yearCurrent, monthCurrent),
-      ...getArrayDate(allDaysCurrentMouth, "current", dateInput),
-      ...getNextMonthDays(yearCurrent, monthCurrent),
-    ];
-
-    const result = [];
-    for (let i = 0; i < allWeeks.length / 7; i++) {
-      result.push(allWeeks.slice(i * 7, 7 * (i + 1)));
-    }
-
-    return result;
-  };
-
   const date = new Date(year, mouth, 1);
 
   return getFullWeeks(date);
 };
 
-export {
-  getFullDaysInMonth,
-  getNextMonthDays,
-  getPreviousMonthDays,
-  getArrayDate,
-  getDaysCalendar,
-};
+export { getDaysCalendar };

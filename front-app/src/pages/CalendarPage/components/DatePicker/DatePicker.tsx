@@ -1,81 +1,53 @@
-import { useMemo, useState } from "react";
+import { useState, useMemo } from "react";
 
-import { Box } from "@mui/material";
-
+import { Controls, CellTitle, CellDate } from "./components";
 import styleScss from "./datePicker.module.scss";
 
+import { MOUTH } from "./constants";
 import { getDaysCalendar } from "./utils/date";
 
-import { WEEKDAY } from "./constants";
-
-import { motion } from "framer-motion";
-
-import { CellDate } from "./CellDate/CellDate";
-
-import { CellDateDay } from "./CellDate/CellDateDay";
-import { Controls } from "./Controls/Controls";
-
-const {} = styleScss;
-
 export const DatePicker = () => {
-  const [year, setYear] = useState<number>(new Date().getFullYear());
-  const [mouth, setMouth] = useState<number>(new Date().getMonth());
+  const [mouth, setMouth] = useState(new Date().getMonth());
+  const [year, setYear] = useState(new Date().getFullYear());
 
-  const cellsWeeks = useMemo(
-    () => getDaysCalendar({ year, mouth }),
-    [mouth, year]
-  );
+  const daysInMonth = useMemo(() => {
+    return getDaysCalendar({ mouth, year });
+  }, [mouth, year]);
 
-  const nextMouth = () => {
-    if (mouth === 11) {
-      setMouth(() => 0);
-    } else {
-      setMouth((prev) => prev + 1);
-    }
-  };
+  const handleControls = useMemo(() => {
+    return {
+      handleNextMonth: () => {
+        setMouth((prevMouth) => (prevMouth === 11 ? 0 : prevMouth + 1));
+      },
+      handlePrevMonth: () => {
+        setMouth((prevMouth) => (prevMouth === 0 ? 11 : prevMouth - 1));
+      },
+      handleNextYear: () => {
+        setYear((prevYear) => prevYear + 1);
+      },
+      handlePrevYear: () => {
+        setYear((prevYear) => prevYear - 1);
+      },
+    };
+  }, []);
 
-  const prevMouth = () => {
-    if (mouth === 0) {
-      setMouth(() => 11);
-    } else {
-      setMouth((prev) => prev - 1);
-    }
-  };
-
-  const nextYear = () => {
-    setYear((prev) => prev + 1);
-  };
-
-  const prevYear = () => {
-    setYear((prev) => prev - 1);
-  };
+  const { wrapper, wrapper_days } = styleScss;
 
   return (
-    <Box>
+    <div className={wrapper}>
       <Controls
-        mouth={mouth}
-        year={year}
-        nextMouth={nextMouth}
-        nextYear={nextYear}
-        prevMoth={prevMouth}
-        prevYear={prevYear}
+        title={`${MOUTH[mouth]}, ${year}`}
+        clickLeftIcon={handleControls.handlePrevMonth}
+        clickRightIcon={handleControls.handleNextMonth}
+        clickLeftDoubleIcon={handleControls.handlePrevYear}
+        clickRightDoubleIcon={handleControls.handleNextYear}
       />
-      <Box sx={{ border: "1px solid rgb(190,190,190)", borderRadius: "10px" }}>
-        <Box sx={{ display: "flex" }}>
-          {WEEKDAY.map((day, index) => (
-            <CellDate key={index} name={day} />
-          ))}
-        </Box>
-        {cellsWeeks.map((week, index) => {
-          return (
-            <Box key={index} sx={{ display: "flex" }}>
-              {week.map((day, index) => {
-                return <CellDateDay {...day} key={index} />;
-              })}
-            </Box>
-          );
-        })}
-      </Box>
-    </Box>
+      <CellTitle />
+      <div className={wrapper_days}>
+        {daysInMonth.map((date, index) => (
+          <CellDate key={index} {...date} />
+        ))}
+      </div>
+    </div>
   );
 };

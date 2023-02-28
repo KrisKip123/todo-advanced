@@ -1,4 +1,4 @@
-const WEEKDAY = [
+const WEEKDAYS = [
   "Monday",
   "Tuesday",
   "Wednesday",
@@ -23,4 +23,4 @@ const MOUTH = [
   "December",
 ] as const;
 
-export { WEEKDAY, MOUTH };
+export { WEEKDAYS, MOUTH };

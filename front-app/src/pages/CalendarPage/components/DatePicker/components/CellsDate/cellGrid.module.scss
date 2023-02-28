@@ -1,0 +1,16 @@
+.container_cell {
+  text-align: end;
+  cursor: default;
+
+  padding: 5px;
+
+  background-color: rgb(255, 255, 255);
+}
+
+.current_day {
+  background-color: rgba(25, 118, 210, 50%);
+}
+
+.weekend {
+  background-color: rgb(210, 210, 210);
+}

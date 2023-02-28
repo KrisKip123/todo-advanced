@@ -1,0 +1,15 @@
+.wrapper_titles {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.container_cell {
+  text-align: center;
+
+  background-color: rgb(255, 255, 255);
+  overflow: hidden;
+
+  cursor: default;
+}

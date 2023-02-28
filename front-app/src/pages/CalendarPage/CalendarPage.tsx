@@ -1,8 +1,9 @@
-import { Container, Box } from "@mui/material";
+import { Container } from "@mui/material";
 
 import { motion } from "framer-motion";
 
 import { pageAnimation } from "../../constants/animation";
+
 import { DatePicker } from "./components/DatePicker/DatePicker";
 
 export const CalendarPage = () => {
@@ -13,16 +14,14 @@ export const CalendarPage = () => {
       animate={"in"}
       exit={"out"}
       variants={pageAnimation}
-      maxWidth={false}
-      disableGutters
       sx={{
         padding: "10px",
       }}
+      maxWidth={false}
+      disableGutters
     >
-      <Box sx={{ display: "flex" }}>
-        <DatePicker />
-      </Box>
-      <div>1</div>
+      <DatePicker />
+      <div>Staticks</div>
     </Container>
   );
 };
