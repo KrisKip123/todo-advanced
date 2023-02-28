@@ -44,8 +44,8 @@ export const DatePicker = () => {
       />
       <CellTitle />
       <div className={wrapper_days}>
-        {daysInMonth.map((date, index) => (
-          <CellDate key={index} {...date} />
+        {daysInMonth.map(({ id, ...date }) => (
+          <CellDate key={id} {...date} />
         ))}
       </div>
     </div>

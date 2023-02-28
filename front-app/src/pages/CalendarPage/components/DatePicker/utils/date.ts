@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 interface ICalendar {
   year: number;
   mouth: number;
@@ -48,6 +50,7 @@ const getArrayDate = (
 
     date.setDate(date.getDate() + i);
     cellsDate.push({
+      id: nanoid(),
       year: date.getFullYear(),
       month: date.getMonth(),
       day: date.getDate(),

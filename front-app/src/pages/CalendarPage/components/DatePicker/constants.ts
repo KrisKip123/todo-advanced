@@ -6,7 +6,7 @@ const WEEKDAYS = [
   "Friday",
   "Saturday",
   "Sunday",
-];
+] as const;
 
 const MOUTH = [
   "January",
