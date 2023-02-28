@@ -5,6 +5,7 @@ import styleScss from "./datePicker.module.scss";
 
 import { MOUTH } from "./constants";
 import { getDaysCalendar } from "./utils/date";
+import { Paper } from "@mui/material";
 
 export const DatePicker = () => {
   const [mouth, setMouth] = useState(new Date().getMonth());
@@ -34,20 +35,22 @@ export const DatePicker = () => {
   const { wrapper, wrapper_days } = styleScss;
 
   return (
-    <div className={wrapper}>
-      <Controls
-        title={`${MOUTH[mouth]}, ${year}`}
-        clickLeftIcon={handleControls.handlePrevMonth}
-        clickRightIcon={handleControls.handleNextMonth}
-        clickLeftDoubleIcon={handleControls.handlePrevYear}
-        clickRightDoubleIcon={handleControls.handleNextYear}
-      />
-      <CellTitle />
-      <div className={wrapper_days}>
-        {daysInMonth.map(({ id, ...date }) => (
-          <CellDate key={id} {...date} />
-        ))}
+    <Paper elevation={11}>
+      <div className={wrapper}>
+        <Controls
+          title={`${MOUTH[mouth]}, ${year}`}
+          clickLeftIcon={handleControls.handlePrevMonth}
+          clickRightIcon={handleControls.handleNextMonth}
+          clickLeftDoubleIcon={handleControls.handlePrevYear}
+          clickRightDoubleIcon={handleControls.handleNextYear}
+        />
+        <CellTitle />
+        <div className={wrapper_days}>
+          {daysInMonth.map(({ id, ...date }) => (
+            <CellDate key={id} {...date} />
+          ))}
+        </div>
       </div>
-    </div>
+    </Paper>
   );
 };
