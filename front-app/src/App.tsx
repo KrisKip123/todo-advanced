@@ -5,7 +5,6 @@ import { NavBar, NavList, Layout, LayoutMain, Footer } from "./components";
 import { AnimatePresence } from "framer-motion";
 
 import { Outlet } from "react-router-dom";
-import { LayoutPage } from "./components/Layout/LayoutPage";
 
 const App = () => {
   const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(true);
