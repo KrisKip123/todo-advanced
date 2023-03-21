@@ -9,6 +9,5 @@ export const authMiddleware = (req: Request, _res: Response, next: NextFunction)
 
   const tokenAccess = headers.split(' ').at(-1);
 
-  console.log(tokenAccess);
   next();
 };
