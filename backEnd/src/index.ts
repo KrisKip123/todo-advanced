@@ -1,15 +1,22 @@
+import http from 'node:http';
 import express from 'express';
 import dotenv from 'dotenv';
-
-const app = express();
-
-app.use(express.json());
+import initLoaders from './loaders/index.js';
+import { UserModel } from './DataBase/models/UserModel.js';
 dotenv.config();
 
-app.get('/', (req, res) => {
-  res.send('Домой');
-});
+const appExpress = express();
 
-app.listen(process.env.PORT, () => {
-  console.log('Start Server', process.env.PORT);
-});
+new initLoaders(appExpress).init();
+
+const app = http.createServer(appExpress);
+
+const connect = async () => {
+  await UserModel.sync();
+
+  app.listen(process.env.PORT, () => {
+    console.log(`Server start ${process.env.PORT}`);
+  });
+};
+
+connect();
