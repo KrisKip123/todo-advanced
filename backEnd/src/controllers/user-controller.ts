@@ -19,8 +19,6 @@ class UserController {
 
       res.status(200).send(userData);
     } catch (error) {
-      console.log('dsdss');
-
       next(error);
     }
   }

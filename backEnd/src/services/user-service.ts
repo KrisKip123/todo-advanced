@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 
 import { UserModel, UserAttr } from '../DataBase/models/UserModel.js';
 import TokenService from './token-service.js';
+import ApiError from '../exceptions/ApiError.js';
 
 type userData = Omit<UserAttr, 'user_id' | 'createdAt' | 'updatedAt'>;
 
@@ -9,7 +10,7 @@ class UserService {
   async registration(userData: userData) {
     const candidate = await UserModel.findOne({ where: { email: userData.email } });
     if (candidate) {
-      throw new Error('Такая почта используется');
+      throw ApiError.RegistrationError(`Данная почта уже используется ${userData.email}`);
     }
 
     const { user_password, ...data } = userData;
@@ -35,7 +36,7 @@ class UserService {
   async login(email: string, password: string) {
     const user = await UserModel.findOne({ where: { email } });
     if (!user) {
-      throw new Error('Не существует');
+      throw ApiError.RegistrationError('Не существует данного пользователя');
     }
 
     const { user_password, ...userData } = user.get();
@@ -43,7 +44,7 @@ class UserService {
     const isActive = await bcrypt.compare(password, user_password);
 
     if (!isActive) {
-      throw new Error('Не правильный логин или пароль');
+      throw ApiError.RegistrationError('Не правильный логин или пароль');
     }
 
     const tokens = TokenService.generateTokens({
